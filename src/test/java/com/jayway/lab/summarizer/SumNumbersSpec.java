@@ -1,11 +1,19 @@
 package com.jayway.lab.summarizer;
 
-import com.jayway.lab.summarizer.support.InitializeSummarizer;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class SumNumbersSpec extends InitializeSummarizer {
+public class SumNumbersSpec {
+
+    private Summarizer summarizer;
+
+    @Before
+    public void
+    given_summarizer_is_initialized() {
+        summarizer = new Summarizer();
+    }
 
     @Test public void
     sums_the_given_numbers() {

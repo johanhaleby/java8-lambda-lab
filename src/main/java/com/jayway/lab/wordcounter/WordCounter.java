@@ -29,7 +29,7 @@ public class WordCounter {
     public Map<String, Integer> getNumberOfInstancesForEachWord(String string) {
         final List<String> words = getWordsAsList(string);
 
-        // According to some mail by Brian Goetz there should be a Reducers.groupBy method but I can't find it...
+        // According to a mail by Brian Goetz there should be a Reducers.groupBy method but I can't find it...
         return words.stream().filter(word -> !word.isEmpty()).map(String::toLowerCase).sorted(String::compareTo).
                 reduce(new TreeMap<String, Integer>(), GROUP_BY, (map, word) -> null);
     }
