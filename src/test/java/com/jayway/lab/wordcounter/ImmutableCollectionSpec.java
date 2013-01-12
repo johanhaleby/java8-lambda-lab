@@ -28,6 +28,14 @@ public class ImmutableCollectionSpec {
 
     @Test(expected = UnsupportedOperationException.class) public void
     get_unique_words_in_order_returns_an_immutable_collection() {
+        /*
+         * The purpose of this exercise is to the make collection returned by
+         * "getUniqueWordsInOrder" immutable in a _fluent_ manner.
+         * E.g. you're not allowed to do:
+         * ..
+         * return Collections.unmodifiableCollection(words);
+         */
+
         // When
         final Collection<String> words = wordCounter.getUniqueWordsInOrder(tale);
 
