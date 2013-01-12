@@ -1,4 +1,4 @@
-package com.jayway.lab;
+package com.jayway.lab.wordcounter;
 
 import java.util.Collection;
 import java.util.Collections;

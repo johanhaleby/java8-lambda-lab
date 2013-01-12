@@ -1,6 +1,5 @@
 package com.jayway.lab.wordcounter;
 
-import com.jayway.lab.WordCounter;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Rule;

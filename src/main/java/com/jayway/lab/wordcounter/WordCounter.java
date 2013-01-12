@@ -1,9 +1,9 @@
-package com.jayway.lab;
+package com.jayway.lab.wordcounter;
 
 import java.util.*;
 import java.util.function.BiFunction;
 
-import static com.jayway.lab.ImmutableCollectionBuilder.a;
+import static com.jayway.lab.wordcounter.ImmutableCollectionBuilder.a;
 import static java.util.Arrays.asList;
 
 public class WordCounter {
