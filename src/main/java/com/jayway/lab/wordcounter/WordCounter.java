@@ -28,6 +28,7 @@ public class WordCounter {
 
     public Map<String, Integer> getNumberOfInstancesForEachWord(String string) {
         final List<String> words = getWordsAsList(string);
+
         return words.stream().filter(word -> !word.isEmpty()).map(String::toLowerCase).sorted(String::compareTo).
                 reduce(new TreeMap<String, Integer>(), GROUP_BY, (map, word) -> null);
     }

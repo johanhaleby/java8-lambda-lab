@@ -1,29 +1,14 @@
 package com.jayway.lab.wordcounter;
 
-import org.apache.commons.io.IOUtils;
-import org.junit.Before;
+import com.jayway.lab.wordcounter.support.InitializeWordCounter;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class GetUniqueWordsInOrderSpec {
-
-    private String tale;
-    private WordCounter wordCounter;
-
-    @Before public void
-    given_tale_is_loaded_to_memory() throws IOException {
-        tale = IOUtils.toString(getClass().getResourceAsStream("/mary.txt"));
-    }
-
-    @Before public void
-    given_word_counter_is_instantiated() {
-        wordCounter = new WordCounter();
-    }
+public class GetUniqueWordsInOrderSpec extends InitializeWordCounter {
 
     @Test public void
     tale_has_57_words() {
