@@ -3,6 +3,8 @@ package com.jayway.lab.receipt;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.IntFunction;
+import java.util.stream.Collectors;
 
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
@@ -40,11 +42,11 @@ public class Receipt {
     }
 
     public List<String> findNamesOfBeersOfType(Type type) {
-        return beers.stream().filter((beer) -> beer.getType() == type).map(Beer::getName).into(new ArrayList<String>());
+        return beers.stream().filter((beer) -> beer.getType() == type).map(Beer::getName).collect(Collectors.<String>toList());
     }
 
     public List<String> findUniqueNamesOfBeersOfTypeInOrder(Type type) {
-        return beers.stream().filter((beer) -> beer.getType() == type).map(Beer::getName).uniqueElements().sorted(String::compareTo).into(new ArrayList<String>());
+        return beers.stream().filter((beer) -> beer.getType() == type).map(Beer::getName).uniqueElements().sorted(String::compareTo).collect(Collectors.<String>toList());
     }
 
     public int sum() {

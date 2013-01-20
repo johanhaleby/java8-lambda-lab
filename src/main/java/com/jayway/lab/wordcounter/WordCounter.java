@@ -18,12 +18,11 @@ public class WordCounter {
         return map;
     };
 
-
     public Collection<String> getUniqueWordsInOrder(String string) {
         final List<String> words = getWordsAsList(string);
 
         return words.stream().filter(word -> !word.isEmpty()).map(String::toLowerCase).sorted(String::compareTo).
-                uniqueElements().into(a(new ArrayList<String>())).immutable();
+                uniqueElements().collect(a(ArrayList<String>::new)).immutable();
     }
 
     public Map<String, Integer> getNumberOfInstancesForEachWord(String string) {

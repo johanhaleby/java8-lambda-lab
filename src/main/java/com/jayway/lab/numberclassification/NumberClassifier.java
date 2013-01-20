@@ -1,7 +1,7 @@
 package com.jayway.lab.numberclassification;
 
 import static com.jayway.lab.numberclassification.Classification.*;
-import static java.util.stream.primitive.PrimitiveStreams.range;
+import static java.util.stream.Streams.intRange;
 
 public class NumberClassifier {
 
@@ -42,7 +42,7 @@ public class NumberClassifier {
     public Classification classify(int number) {
         if(number <= 0) throw new IllegalArgumentException("Number must be greater than 0");
         // We use "number+1" in range since numbers are not inclusive in the range method.
-        final int sumOfFactors = range(1, number + 1).filter(potentialFactory -> number % potentialFactory == 0).sum();
+        final int sumOfFactors = intRange(1, number + 1).filter(potentialFactory -> number % potentialFactory == 0).sum();
         final int numberTimesTwo = 2 * number;
 
         final Classification classification;
