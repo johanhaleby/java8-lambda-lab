@@ -71,6 +71,15 @@ public class ReceiptSpec {
         // Then
         assertThat(sum).isEqualTo(1460);
     }
+
+    @Test public void
+    find_average_price_of_all_beers() {
+        // When
+        double average = receipt.averagePrice();
+
+        // Then
+        assertThat(average).isEqualTo(18.25);
+    }
     
     @Test public void 
     receipt_have_at_least_one_beer_that_costs_fifteen_or_more() {

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.summarizingInt;
+
 public class Receipt {
 
     private List<Beer> beers = new ArrayList<Beer>() {{
@@ -49,5 +51,9 @@ public class Receipt {
 
     public int sum() {
         return beers.stream().map(Beer::getPrice).reduce(0, Integer::sum);
+    }
+
+    public double averagePrice() {
+        return beers.stream().collect(summarizingInt(Beer::getPrice)).getAverage();
     }
 }
