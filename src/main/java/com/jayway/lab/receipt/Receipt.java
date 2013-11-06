@@ -50,7 +50,7 @@ public class Receipt {
     }
 
     public int sum() {
-        return beers.stream().map(Beer::getPrice).reduce(0, Integer::sum);
+        return beers.stream().mapToInt(Beer::getPrice).sum();
     }
 
     public double averagePrice() {
