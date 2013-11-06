@@ -10,8 +10,7 @@ public class InitializeWordCounter {
     protected String tale;
     protected WordCounter wordCounter;
 
-    @Before
-    public void
+    @Before public void
     given_tale_is_loaded_to_memory() throws IOException {
         tale = IOUtils.toString(getClass().getResourceAsStream("/mary.txt"));
     }

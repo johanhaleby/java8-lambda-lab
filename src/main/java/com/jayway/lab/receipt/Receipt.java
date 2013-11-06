@@ -3,11 +3,7 @@ package com.jayway.lab.receipt;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.IntFunction;
 import java.util.stream.Collectors;
-
-import static java.lang.Integer.MAX_VALUE;
-import static java.lang.Integer.MIN_VALUE;
 
 public class Receipt {
 
@@ -28,17 +24,15 @@ public class Receipt {
     }};
 
     public int findPriceOfCheapestBeer() {
-        // For some reason "min()" cannot be used
-        return beers.stream().map(Beer::getPrice).reduce(MAX_VALUE, Math::min);
+        return beers.stream().map(Beer::getPrice).min(Integer::compare).get();
     }
 
     public int findPriceOfMostExpensiveBeer() {
-        // For some reason "max()" cannot be used
-        return beers.stream().map(Beer::getPrice).reduce(MIN_VALUE, Math::max);
+        return beers.stream().map(Beer::getPrice).max(Integer::compare).get();
     }
 
     public String findNameOfMostExpensiveBeer() {
-        return beers.stream().max((beer1, beer2) -> beer1.getPrice() - beer2.getPrice()).orElseThrow(IllegalArgumentException.class).getName();
+        return beers.stream().max((beer1, beer2) -> beer1.getPrice() - beer2.getPrice()).orElseThrow(IllegalStateException::new).getName();
     }
 
     public List<String> findNamesOfBeersOfType(Type type) {
@@ -46,7 +40,7 @@ public class Receipt {
     }
 
     public List<String> findUniqueNamesOfBeersOfTypeInOrder(Type type) {
-        return beers.stream().filter((beer) -> beer.getType() == type).map(Beer::getName).uniqueElements().sorted(String::compareTo).collect(Collectors.<String>toList());
+        return beers.stream().filter((beer) -> beer.getType() == type).map(Beer::getName).distinct().sorted(String::compareTo).collect(Collectors.<String>toList());
     }
 
     public int sum() {

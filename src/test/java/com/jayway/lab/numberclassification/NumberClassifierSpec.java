@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.jayway.lab.numberclassification.Classification.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class NumberClassifierSpec {
 

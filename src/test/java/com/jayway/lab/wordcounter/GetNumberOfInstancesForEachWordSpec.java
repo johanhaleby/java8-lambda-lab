@@ -6,26 +6,26 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static org.fest.assertions.Assertions.assertThat;
-import static org.fest.assertions.MapAssert.entry;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 public class GetNumberOfInstancesForEachWordSpec extends InitializeWordCounter {
 
     @Test public void
     returns_a_map_with_number_of_instances_of_each_word() {
         // When
-        final Map<String,Integer> numberOfInstancesForEachWord = wordCounter.getNumberOfInstancesForEachWord(tale);
+        final Map<String, Long> numberOfInstancesForEachWord = wordCounter.getNumberOfInstancesForEachWord(tale);
 
         // Then
-        assertThat(numberOfInstancesForEachWord).hasSize(57).includes(entry("a", 3), entry("about", 4), entry("and", 10), entry("appear", 1),
-                entry("as", 1), entry("at", 1), entry("but", 1), entry("children", 3), entry("cry", 1), entry("day", 4), entry("did", 2),
-                entry("does", 2), entry("eager", 1), entry("everywhere", 2), entry("fleece", 1), entry("followed", 2), entry("go", 1),
-                entry("had", 2), entry("her", 2), entry("it", 9), entry("know", 4), entry("lamb", 12), entry("laugh", 4), entry("lingered", 1),
-                entry("little", 4), entry("love", 4), entry("loves", 2), entry("made", 2), entry("mary", 13), entry("near", 1), entry("one", 4),
-                entry("out", 4), entry("patiently", 4), entry("play", 4), entry("reply", 1), entry("rules", 1), entry("school", 5), entry("see", 1),
-                entry("snow", 1), entry("so", 6), entry("still", 1), entry("sure", 1), entry("teacher", 3), entry("that", 2), entry("the", 14),
-                entry("till", 1), entry("to", 4), entry("turned", 4), entry("waited", 2), entry("was", 3), entry("went", 4), entry("which", 1),
-                entry("white", 1), entry("whose", 1), entry("why", 4), entry("you", 4)
+        assertThat(numberOfInstancesForEachWord).hasSize(57).contains(entry("a", 3L), entry("about", 4L), entry("and", 10L), entry("appear", 1L),
+                entry("as", 1L), entry("at", 1L), entry("but", 1L), entry("children", 3L), entry("cry", 1L), entry("day", 4L), entry("did", 2L),
+                entry("does", 2L), entry("eager", 1L), entry("everywhere", 2L), entry("fleece", 1L), entry("followed", 2L), entry("go", 1L),
+                entry("had", 2L), entry("her", 2L), entry("it", 9L), entry("know", 4L), entry("lamb", 12L), entry("laugh", 4L), entry("lingered", 1L),
+                entry("little", 4L), entry("love", 4L), entry("loves", 2L), entry("made", 2L), entry("mary", 13L), entry("near", 1L), entry("one", 4L),
+                entry("out", 4L), entry("patiently", 4L), entry("play", 4L), entry("reply", 1L), entry("rules", 1L), entry("school", 5L), entry("see", 1L),
+                entry("snow", 1L), entry("so", 6L), entry("still", 1L), entry("sure", 1L), entry("teacher", 3L), entry("that", 2L), entry("the", 14L),
+                entry("till", 1L), entry("to", 4L), entry("turned", 4L), entry("waited", 2L), entry("was", 3L), entry("went", 4L), entry("which", 1L),
+                entry("white", 1L), entry("whose", 1L), entry("why", 4L), entry("you", 4L)
 
         );
     }
@@ -33,7 +33,7 @@ public class GetNumberOfInstancesForEachWordSpec extends InitializeWordCounter {
     @Test public void
     returns_a_map_ordered_by_name() {
         // When
-        final Map<String,Integer> numberOfInstancesForEachWord = wordCounter.getNumberOfInstancesForEachWord(tale);
+        final Map<String, Long> numberOfInstancesForEachWord = wordCounter.getNumberOfInstancesForEachWord(tale);
 
         // Then
         assertThat(new ArrayList<>(numberOfInstancesForEachWord.keySet())).containsExactly("a", "about", "against", "and", "appear", "as",

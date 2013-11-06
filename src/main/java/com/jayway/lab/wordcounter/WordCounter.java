@@ -1,36 +1,27 @@
 package com.jayway.lab.wordcounter;
 
 import java.util.*;
-import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import static com.jayway.lab.wordcounter.ImmutableCollectionBuilder.a;
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toCollection;
 
 public class WordCounter {
-    private static final BiFunction<TreeMap<String,Integer>,String,TreeMap<String,Integer>> GROUP_BY = (map, word) -> {
-        int value;
-        if (map.containsKey(word)) {
-            value = map.get(word) + 1;
-        } else {
-            value = 1;
-        }
-        map.put(word, value);
-        return map;
-    };
 
     public Collection<String> getUniqueWordsInOrder(String string) {
         final List<String> words = getWordsAsList(string);
 
         return words.stream().filter(word -> !word.isEmpty()).map(String::toLowerCase).sorted(String::compareTo).
-                uniqueElements().collect(a(ArrayList<String>::new)).immutable();
+                distinct().collect(toCollection(ArrayList::new));
     }
 
-    public Map<String, Integer> getNumberOfInstancesForEachWord(String string) {
+    public Map<String, Long> getNumberOfInstancesForEachWord(String string) {
         final List<String> words = getWordsAsList(string);
 
-        // According to a mail by Brian Goetz there should be a Reducers.groupBy method but I can't find it...
         return words.stream().filter(word -> !word.isEmpty()).map(String::toLowerCase).sorted(String::compareTo).
-                reduce(new TreeMap<String, Integer>(), GROUP_BY, (map, word) -> null);
+                collect(groupingBy(Function.<String>identity(), TreeMap::new, Collectors.counting()));
     }
 
     private List<String> getWordsAsList(String string) {

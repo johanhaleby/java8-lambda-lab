@@ -1,17 +1,18 @@
 package com.jayway.lab.wordcounter;
 
 import com.jayway.lab.wordcounter.support.InitializeWordCounter;
-import org.junit.Rule;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.Collection;
 
-public class ImmutableCollectionSpec extends InitializeWordCounter {
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
+import static com.googlecode.catchexception.CatchException.caughtException;
+import static com.googlecode.catchexception.apis.CatchExceptionAssertJ.then;
+import static com.googlecode.catchexception.apis.CatchExceptionAssertJ.when;
 
-    @Test(expected = UnsupportedOperationException.class) public void
+public class ImmutableCollectionSpec extends InitializeWordCounter {
+
+    @Test @Ignore("Fix me") public void
     get_unique_words_in_order_returns_an_immutable_collection() {
         /*
          * The purpose of this exercise is to the make collection returned by
@@ -21,10 +22,13 @@ public class ImmutableCollectionSpec extends InitializeWordCounter {
          * return Collections.unmodifiableCollection(words);
          */
 
-        // When
+        // Given
         final Collection<String> words = wordCounter.getUniqueWordsInOrder(tale);
 
+        // When
+        when(words).add("word");
+
         // Then
-        words.add("word");
+        then(caughtException()).describedAs("Collection was not immutable").isExactlyInstanceOf(UnsupportedOperationException.class);
     }
 }
