@@ -43,6 +43,10 @@ public class Receipt {
         return beers.stream().filter((beer) -> beer.getType() == type).map(Beer::getName).distinct().sorted(String::compareTo).collect(Collectors.<String>toList());
     }
 
+    public boolean hasAnyBeerWithPriceGreaterThanOrEqualTo(int price) {
+        return beers.stream().map(Beer::getPrice).anyMatch(currentPrice -> currentPrice >= price);
+    }
+
     public int sum() {
         return beers.stream().map(Beer::getPrice).reduce(0, Integer::sum);
     }
