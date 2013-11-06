@@ -30,7 +30,7 @@ public class Receipt {
     }
 
     public int findPriceOfMostExpensiveBeer() {
-        return beers.stream().map(Beer::getPrice).max(Integer::compare).get();
+        return beers.stream().mapToInt(Beer::getPrice).max().getAsInt();
     }
 
     public String findNameOfMostExpensiveBeer() {
@@ -50,6 +50,7 @@ public class Receipt {
     }
 
     public int sum() {
+        // Alternative to beers.stream().map(Beer::getPrice).reduce(0, Integer::sum);
         return beers.stream().mapToInt(Beer::getPrice).sum();
     }
 
