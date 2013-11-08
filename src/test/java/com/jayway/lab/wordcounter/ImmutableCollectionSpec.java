@@ -12,7 +12,7 @@ import static com.googlecode.catchexception.apis.CatchExceptionAssertJ.when;
 
 public class ImmutableCollectionSpec extends InitializeWordCounter {
 
-    @Test @Ignore("Fix me") public void
+    @Test public void
     get_unique_words_in_order_returns_an_immutable_collection() {
         /*
          * The purpose of this exercise is to the make collection returned by
