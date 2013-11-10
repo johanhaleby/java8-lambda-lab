@@ -2,8 +2,8 @@ package com.jayway.lab.summarizer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BinaryOperator;
-import java.util.stream.Collectors;
+
+import static java.util.stream.IntStream.range;
 
 public class ListSummarizer {
 
@@ -15,17 +15,12 @@ public class ListSummarizer {
             throw new IllegalArgumentException("You need to supply lists of equal size.");
         }
 
-        return numbers.stream().collect(() -> {
-            List<List<Integer>> supplier = new ArrayList<>();
-            for (int i = 0; i < numbers.get(0).size(); i++) {
-                supplier.add(new ArrayList<>());
-            }
-            return supplier;
-        }, (List<List<Integer>> acc, List<Integer> integers) -> {
-            for (int i = 0; i < integers.size(); i++) {
-                int number = integers.get(i);
-                acc.get(i).add(number);
-            }
-        }, List<List<Integer>>::addAll).stream().map(integers -> integers.stream().reduce(0, Integer::sum)).collect(Collectors.toList());
+        final int numberOfElementsInEachList = numbers.get(0).size();
+        return numbers.stream().reduce(new ArrayList<Integer>(numberOfElementsInEachList) {{
+            range(0, numberOfElementsInEachList).forEach((i) -> add(0));
+        }}, (acc, listNumbers) -> { // Where's zip?
+            range(0, listNumbers.size()).forEach((i) -> acc.set(i, acc.get(i) + listNumbers.get(i)));
+            return acc;
+        });
     }
 }
