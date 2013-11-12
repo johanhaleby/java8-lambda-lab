@@ -7,13 +7,15 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
+import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
+
 public class ImmutableCollector {
 
     public static <T, A extends Collection<T>> Collector<T, A, Collection<T>> toImmutableCollection(Supplier<A> collectionFactory) {
         return Collector.of(collectionFactory, Collection::add, (left, right) -> {
             left.addAll(right);
             return left;
-        }, Collections::unmodifiableCollection);
+        }, Collections::unmodifiableCollection, IDENTITY_FINISH);
     }
 
     public static <T> Collector<T, Collection<T>, Collection<T>> toImmutableCollection() {
@@ -24,7 +26,7 @@ public class ImmutableCollector {
         return Collector.of(collectionFactory, List::add, (left, right) -> {
             left.addAll(right);
             return left;
-        }, Collections::unmodifiableList);
+        }, Collections::unmodifiableList, IDENTITY_FINISH);
     }
 
     public static <T> Collector<T, List<T>, List<T>> toImmutableList() {
