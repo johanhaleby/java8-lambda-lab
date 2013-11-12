@@ -2,34 +2,32 @@ package com.jayway.lab.wordcounter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import static java.util.Collections.unmodifiableCollection;
-import static java.util.Collections.unmodifiableList;
-
 public class ImmutableCollector {
 
-    public static <T, C extends Collection<T>> Collector<T, ?, C> toImmutableCollection(Supplier<C> collectionFactory) {
-        return Collector.of(collectionFactory, Collection<T>::add, (r1, r2) -> {
-            r1.addAll(r2);
-            return r1;
-        }, collection -> (C) unmodifiableCollection(collection));
+    public static <T, A extends Collection<T>> Collector<T, A, Collection<T>> toImmutableCollection(Supplier<A> collectionFactory) {
+        return Collector.of(collectionFactory, Collection::add, (left, right) -> {
+            left.addAll(right);
+            return left;
+        }, Collections::unmodifiableCollection);
     }
 
-    public static <T, C extends Collection<T>> Collector<T, ?, C> toImmutableCollection() {
-        return toImmutableCollection(() -> (C) new ArrayList<>());
+    public static <T> Collector<T, Collection<T>, Collection<T>> toImmutableCollection() {
+        return toImmutableCollection(ArrayList::new);
     }
 
-    public static <T, C extends List<T>> Collector<T, ?, C> toImmutableList(Supplier<C> collectionFactory) {
+    public static <T, A extends List<T>> Collector<T, A, List<T>> toImmutableList(Supplier<A> collectionFactory) {
         return Collector.of(collectionFactory, List::add, (left, right) -> {
             left.addAll(right);
             return left;
-        }, list -> (C) unmodifiableList(list));
+        }, Collections::unmodifiableList);
     }
 
-    public static <T, C extends List<T>> Collector<T, ?, C> toImmutableList() {
-        return toImmutableList(() -> (C) new ArrayList<>());
+    public static <T> Collector<T, List<T>, List<T>> toImmutableList() {
+        return toImmutableList(ArrayList::new);
     }
 }
