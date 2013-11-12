@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
+import static java.util.stream.Collector.Characteristics.CONCURRENT;
 import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
+import static java.util.stream.Collector.Characteristics.UNORDERED;
 
 public class ImmutableCollector {
 
@@ -15,7 +17,7 @@ public class ImmutableCollector {
         return Collector.of(collectionFactory, Collection::add, (left, right) -> {
             left.addAll(right);
             return left;
-        }, Collections::unmodifiableCollection, IDENTITY_FINISH);
+        }, Collections::unmodifiableCollection);
     }
 
     public static <T> Collector<T, Collection<T>, Collection<T>> toImmutableCollection() {
@@ -26,7 +28,7 @@ public class ImmutableCollector {
         return Collector.of(collectionFactory, List::add, (left, right) -> {
             left.addAll(right);
             return left;
-        }, Collections::unmodifiableList, IDENTITY_FINISH);
+        }, Collections::unmodifiableList);
     }
 
     public static <T> Collector<T, List<T>, List<T>> toImmutableList() {
