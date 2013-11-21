@@ -3,7 +3,6 @@ package com.jayway.lab.wordcounter;
 import com.jayway.lab.wordcounter.support.InitializeWordCounter;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,7 +36,7 @@ public class GetUniqueWordsInOrderSpec extends InitializeWordCounter {
         final Collection<String> words = wordCounter.getUniqueWordsInOrder(tale);
 
         // Then
-        assertThat(new ArrayList<>(words)).containsExactly("a", "about", "against", "and", "appear", "as", "at", "but", "children", "cry",
+        assertThat(words).containsExactly("a", "about", "against", "and", "appear", "as", "at", "but", "children", "cry",
                 "day", "did", "does", "eager", "everywhere", "fleece", "followed", "go", "had", "her", "it", "know", "lamb", "laugh",
                 "lingered", "little", "love", "loves", "made", "mary", "near", "one", "out", "patiently", "play", "reply", "rules", "school",
                 "see", "snow", "so", "still", "sure", "teacher", "that", "the", "till", "to", "turned", "waited", "was", "went", "which",

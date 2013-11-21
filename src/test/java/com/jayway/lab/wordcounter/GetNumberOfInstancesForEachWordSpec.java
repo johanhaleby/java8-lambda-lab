@@ -36,7 +36,7 @@ public class GetNumberOfInstancesForEachWordSpec extends InitializeWordCounter {
         final Map<String, Long> numberOfInstancesForEachWord = wordCounter.getNumberOfInstancesForEachWord(tale);
 
         // Then
-        assertThat(new ArrayList<>(numberOfInstancesForEachWord.keySet())).containsExactly("a", "about", "against", "and", "appear", "as",
+        assertThat(numberOfInstancesForEachWord.keySet()).containsExactly("a", "about", "against", "and", "appear", "as",
                 "at", "but", "children", "cry", "day", "did", "does", "eager", "everywhere", "fleece", "followed", "go", "had", "her", "it",
                 "know", "lamb", "laugh", "lingered", "little", "love", "loves", "made", "mary", "near", "one", "out", "patiently", "play",
                 "reply", "rules", "school", "see", "snow", "so", "still", "sure", "teacher", "that", "the", "till", "to", "turned", "waited",

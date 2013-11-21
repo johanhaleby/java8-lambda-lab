@@ -3,6 +3,9 @@ package com.jayway.lab.numberclassification;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.googlecode.catchexception.CatchException.caughtException;
+import static com.googlecode.catchexception.apis.CatchExceptionAssertJ.then;
+import static com.googlecode.catchexception.apis.CatchExceptionAssertJ.when;
 import static com.jayway.lab.numberclassification.Classification.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,21 +54,27 @@ public class NumberClassifierSpec {
         assertThat(classification).isEqualTo(DEFICIENT);
     }
 
-    @Test(expected = IllegalArgumentException.class) public void
+    @Test public void
     throws_illegal_argument_exception_when_number_is_less_zero() {
         // Given
         int number = -21;
 
         // When
-        numberClassifier.classify(number);
+        when(numberClassifier).classify(number);
+
+        // Then
+        then(caughtException()).isExactlyInstanceOf(IllegalArgumentException.class).hasMessage("Number must be greater than 0");
     }
 
-    @Test(expected = IllegalArgumentException.class) public void
+    @Test public void
     throws_illegal_argument_exception_when_number_is_zero() {
         // Given
         int number = 0;
 
         // When
-        numberClassifier.classify(number);
+        when(numberClassifier).classify(number);
+
+        // Then
+        then(caughtException()).isExactlyInstanceOf(IllegalArgumentException.class).hasMessage("Number must be greater than 0");
     }
 }
